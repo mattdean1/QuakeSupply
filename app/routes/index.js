@@ -1,4 +1,5 @@
 var express = require('express');
+var request = require('request');
 var router = express.Router();
 
 /* GET home page. */
@@ -7,7 +8,18 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/map', function(req, res, next) {
-  res.render('map', { title: 'map' });
+  request('http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_day.geojson', function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      console.log(body) // Show the HTML for the Google homepage.
+      res.render('map', {
+        title: 'map',
+        data: JSON.stringify(body)
+      });
+    }else{
+      res.render('index', {title:'index'});
+    }
+  })
+
 });
 
 router.get('/userlist', function(req, res) {
