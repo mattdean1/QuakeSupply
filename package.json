@@ -5,7 +5,7 @@
   "scripts": {
     "watch": "watchify public/js/main.js -o public/js/bundle.js -v",
     "build": "browserify public/js/main.js -o public/js/bundle.js",
-    "start": "npm run watch & nodemon ./bin/www"
+    "start": "nodemon ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.15.1",
