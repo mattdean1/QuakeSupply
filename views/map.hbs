@@ -4,5 +4,15 @@
 <div class="row">
    <div id="map"></div>
 </div>
-<script>console.log(JSON.parse({{{data}}}));</script>
+
 <script src="/js/map.js"></script>
+<script>
+  var json = JSON.parse({{{data}}});
+  console.log(json);
+  $( document ).ready(function() {
+    var coordinates = json.features[0].geometry.coordinates;
+    console.log(coordinates[0]);
+    initMap(coordinates[0], coordinates[1]);
+  });
+  // initMap();
+</script>
