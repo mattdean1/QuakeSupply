@@ -1,0 +1,15 @@
+<h1>Node Hack</h1>
+<br>
+<br>
+<div class="row">
+   <div id="map"></div>
+</div>
+
+<script src="/js/outpostmap.js"></script>
+<script>
+  var json = JSON.parse({{{outpostlist}}});
+  console.log(json);
+  $( document ).ready(function() {
+    initMap(json);
+  });
+</script>

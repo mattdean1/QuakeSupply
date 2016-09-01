@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/map', function(req, res, next) {
-  request('http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_day.geojson', function (error, response, body) {
+  request('http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_week.geojson', function (error, response, body) {
     if (!error && response.statusCode == 200) {
       console.log(body) // Show the HTML for the Google homepage.
       res.render('map', {
@@ -19,7 +19,6 @@ router.get('/map', function(req, res, next) {
       res.render('index', {title:'index'});
     }
   })
-
 });
 
 router.get('/overview', function(req, res) {
@@ -70,5 +69,14 @@ router.post('/addoutpost', function(req, res) {
         }
     });
 });
-
+router.get('/outpostmap', function(req, res) {
+    var db = req.db;
+    var collection = db.get('inventorytest');
+    collection.find({},{},function(e,docs){
+        res.render('outpostmap', {
+            title : 'outpost map',
+            outpostlist : JSON.stringify(JSON.stringify(docs))
+        });
+    });
+});
 module.exports = router;
