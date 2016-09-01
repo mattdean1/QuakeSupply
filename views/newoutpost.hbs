@@ -1,0 +1,16 @@
+<h1>Node Hack</h1>
+<br>
+<br>
+<div class="row">
+    <form id="adduser" name="addoutpost" method="post" action="/addoutpost">
+      <input type="text" name="outpostname" placeholder="name" required></input>
+      Coordinates:
+      <input type="number" name="lat" placeholder="latitude" required></input>
+      <input type="number" name="long" placeholder="longitude" required></input>
+      Supplies:
+      <input type="number" name="food" placeholder="food" required min="0"></input>
+      <input type="number" name="water" placeholder="water" required  min="0"></input>
+      <input type="number" name="tarpaulin" placeholder="tarpaulin" required  min="0"></input>
+      <button class="btn btn-submit" id="submit" type="submit">submit</button>
+    </form>
+</div>

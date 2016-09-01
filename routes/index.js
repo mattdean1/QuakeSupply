@@ -27,27 +27,15 @@ router.get('/overview', function(req, res) {
     var collection = db.get('inventorytest');
     collection.find({},{},function(e,docs){
         res.render('inventoryoverview', {
+            title : 'outpost overview',
             "outpostlist" : docs
         });
     });
 });
-
-router.get('/userlist', function(req, res) {
-    var db = req.db;
-    var collection = db.get('usercollection');
-    collection.find({},{},function(e,docs){
-        res.render('userlist', {
-            "userlist" : docs
-        });
-    });
+router.get('/newoutpost', function(req, res) {
+    res.render('newoutpost', { title: 'Add New outpost' });
 });
-
-router.get('/newuser', function(req, res) {
-    res.render('newuser', { title: 'Add New User' });
-});
-
-/* POST to Add User Service */
-router.post('/adduser', function(req, res) {
+router.post('/addoutpost', function(req, res) {
 
     // Set our internal DB variable
     var db = req.db;
@@ -57,12 +45,20 @@ router.post('/adduser', function(req, res) {
     var userEmail = req.body.email;
 
     // Set our collection
-    var collection = db.get('usercollection');
+    var collection = db.get('inventorytest');
 
     // Submit to the DB
     collection.insert({
-        "username" : userName,
-        "email" : userEmail
+        "name" : req.body.outpostname,
+        "coords": {
+          "lat" : parseInt(req.body.lat),
+          "long" : parseInt(req.body.long)
+        },
+        "supplies": {
+          "food" : parseInt(req.body.food),
+          "water" : parseInt(req.body.water),
+          "tarpaulin" : parseInt(req.body.tarpaulin)
+        }
     }, function (err, doc) {
         if (err) {
             // If it failed, return error
@@ -70,7 +66,7 @@ router.post('/adduser', function(req, res) {
         }
         else {
             // And forward to success page
-            res.redirect("userlist");
+            res.redirect("overview");
         }
     });
 });
