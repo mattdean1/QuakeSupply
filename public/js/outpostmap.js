@@ -36,21 +36,22 @@ function initMap(json){
   //map onclick if toggle is set
   function onMapClick(e){
     if(addoutpost){
-      swal( {   title: "An input!",
-                text: "Write something interesting:",
+      swal( {   title: "Create Outpost!",
+                text: "Give your outpost a name:",
                 type: "input",
                 showCancelButton: true,
                 closeOnConfirm: false,
                 animation: "slide-from-top",
-                inputPlaceholder: "Write something"
+                inputPlaceholder: "Outpost name"
               },
               function(inputValue){   if (inputValue === false) return false;
                                       if (inputValue === "") {swal.showInputError("You need to write something!");return false }
                                       addOutpost(inputValue, e.latlng.lat, e.latlng.lng);
-                                      swal("Nice!", "You added " + inputValue, "success");
+                                      swal("Nice!", "You created the " + inputValue + " outpost", "success");
                                       populateOutposts(map);
                                     }
             );
+      toggle();
     }
   }
   map.on('click', onMapClick);
