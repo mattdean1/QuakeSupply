@@ -71,7 +71,8 @@ function populateOutposts(map){
         var content = "<b>"+outpost.name+"</b><br>";
             content+= "Food: "+outpost.supplies.food+"<br>";
             content+= "Water: "+outpost.supplies.water+"<br>";
-            content+= "Tarpaulin: "+outpost.supplies.tarpaulin+"<br>";
+            content+= "Tarpaulin: "+outpost.supplies.tarpaulin+"<br><br>";
+            content+= "<div style='text-align:right'><a href=''>Edit</a></div>";
         var popup = L.popup({closeButton: false})
           .setContent(content);
         var marker = L.marker([lat, long]).addTo(map);
@@ -80,22 +81,6 @@ function populateOutposts(map){
       }
     }
   });
-}
-
-function addOutpost(name, latitude, longitude){
-  //add new outpost to the db using the api
-  var outpost = {outpostname: name,lat: parseInt(latitude),long:parseInt(longitude)}
-  $.ajax({
-    type: 'POST',
-    data: outpost,
-    url: window.location.origin+'/api/addoutpost',
-  }).done(function(response){
-    if(response.message === 'outpost added'){
-      console.log("success");
-    }else{
-      console.log("failure");
-    }
-  })
 }
 
 //toggle for adding outposts to map onclick

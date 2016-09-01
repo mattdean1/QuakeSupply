@@ -2,16 +2,27 @@ var express = require('express');
 var request = require('request');
 var router = express.Router();
 
-/* GET list of outposts. */
+var mongo = require('mongodb');
+var monk = require('monk');
+var db = monk('heroku_gv1rn240:gk10fvpl27rfjk4e882a035u4c@ds021026.mlab.com:21026/heroku_gv1rn240');
+var collection = db.get('inventorytest');
+
+const origin = "https://recruitment-hack.herokuapp.com";
+
+//get list of all outposts.
 router.get('/outposts', function(req, res, next) {
-  var db = req.db;
-  var collection = db.get('inventorytest');
   collection.find({},{},function(e,docs){
       res.json(docs);
   });
 });
+//get info on a specific outpost
+router.get('/outposts/:id', function(req, res, next) {
+  collection.find({_id: req.params.id},{},function(e,docs){
+    res.json(docs);
+  });
+});
 
-/* GET list of significant earthquakes from the past week */
+// get list of significant earthquakes from the past week
 router.get('/earthquakes', function(req, res, next) {
   request('http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_month.geojson', function (error, response, body) {
     if (!error && response.statusCode == 200) {
@@ -22,15 +33,8 @@ router.get('/earthquakes', function(req, res, next) {
   })
 });
 
-/* add new outpost to db */
+// add new outpost to db
 router.post('/addoutpost', function(req, res) {
-    // Set our internal DB variable
-    var db = req.db;
-
-    // Set our collection
-    var collection = db.get('inventorytest');
-
-    // Submit to the DB
     collection.insert({
         "name" : req.body.outpostname,
         "coords": {
@@ -38,9 +42,9 @@ router.post('/addoutpost', function(req, res) {
           "long" : parseInt(req.body.long)
         },
         "supplies": {
-          "food" : 100,
-          "water" : 100,
-          "tarpaulin" : 100
+          "food" : (parseInt(req.body.food) || 100),
+          "water" : (parseInt(req.body.water) || 100),
+          "tarpaulin" : (parseInt(req.body.tarpaulin) || 100)
         }
     }, function (err, doc) {
         if (err) {
@@ -48,8 +52,11 @@ router.post('/addoutpost', function(req, res) {
             res.send(err);
         }
         else {
-            // And forward to success page
-            res.send({message:'outpost added'});
+            if(req.body.manual=="true"){
+              res.redirect(origin+"/overview");
+            }else{
+              res.send({message:'outpost added'});
+            }
         }
     });
 });
