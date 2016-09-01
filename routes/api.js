@@ -45,11 +45,11 @@ router.post('/addoutpost', function(req, res) {
     }, function (err, doc) {
         if (err) {
             // If it failed, return error
-            res.send("There was a problem adding the information to the database.");
+            res.send(err);
         }
         else {
             // And forward to success page
-            res.json({message:'outpost added'});
+            res.send({message:'outpost added'});
         }
     });
 });

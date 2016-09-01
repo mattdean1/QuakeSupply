@@ -1,5 +1,3 @@
-var request = require('request');
-
 $(document).ready(function(){
   initMap();
 })
@@ -24,17 +22,26 @@ function initMap(){
 
   function onMapClick(e){
     if(addoutpost){
-      popup
-        .setLatLng(e.latlng)
-        .setContent("asdf")
-        .openOn(map);
+      swal( {   title: "An input!",
+                text: "Write something interesting:",
+                type: "input",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                animation: "slide-from-top",
+                inputPlaceholder: "Write something"
+              },
+              function(inputValue){   if (inputValue === false) return false;
+                                      if (inputValue === "") {swal.showInputError("You need to write something!");return false }
+                                      addOutpost(inputValue, e.latlng.lat, e.latlng.lng);
+                                      swal("Nice!", "You added " + inputValue, "success");
+                                      populateOutposts(map);
+                                    }
+            );
     }
   }
   map.on('click', onMapClick);
 
   populateOutposts(map);
-
-  addOutpost("paramtest", 10, 10);
 }
 
 function populateOutposts(map){
@@ -46,7 +53,7 @@ function populateOutposts(map){
       try{
         var lat = outpost.coords.lat;
         var long = outpost.coords.long;
-        var marker = L.marker([long, lat]).addTo(map); //leaflet uses the coords like this
+        var marker = L.marker([lat, long]).addTo(map);
         marker.bindPopup("<b>"+outpost.name+"</b>");
       }catch(e){
       }
@@ -55,7 +62,16 @@ function populateOutposts(map){
 }
 
 function addOutpost(name, latitude, longitude){
-  request.post(window.location.origin+'/api/addoutpost').form({outpostname: name,
-                                                            lat: parseInt(latitude),
-                                                            long:parseInt(longitude)});
+  var outpost = {outpostname: name,lat: parseInt(latitude),long:parseInt(longitude)}
+  $.ajax({
+    type: 'POST',
+    data: outpost,
+    url: window.location.origin+'/api/addoutpost',
+  }).done(function(response){
+    if(response.message === 'outpost added'){
+      console.log("success");
+    }else{
+      console.log("failure");
+    }
+  })
 }
