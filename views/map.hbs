@@ -7,7 +7,7 @@
 
 <script src="/js/map.js"></script>
 <script>
-  $.getJSON('/api/sigweek', function(json){
+  $.getJSON('/api/earthquakes', function(json){
     console.log(json);
     var coordinates = json.features[0].geometry.coordinates;
     initMap(coordinates[0], coordinates[1]);
