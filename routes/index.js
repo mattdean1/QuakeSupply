@@ -22,6 +22,16 @@ router.get('/map', function(req, res, next) {
 
 });
 
+router.get('/overview', function(req, res) {
+    var db = req.db;
+    var collection = db.get('inventorytest');
+    collection.find({},{},function(e,docs){
+        res.render('inventoryoverview', {
+            "outpostlist" : docs
+        });
+    });
+});
+
 router.get('/userlist', function(req, res) {
     var db = req.db;
     var collection = db.get('usercollection');

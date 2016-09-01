@@ -1,0 +1,12 @@
+{
+  "name": "outpost3",
+  "coords": {
+    "lat": 3,
+    "long": 3
+  },
+  "supplies": {
+    "food": 10,
+    "water": 10,
+    "tarpaulin": 10
+  }
+}
