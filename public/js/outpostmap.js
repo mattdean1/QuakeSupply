@@ -1,10 +1,16 @@
+var request = require('request');
+
+$(document).ready(function(){
+  initMap();
+})
+
 var addoutpost = false;
 function toggle(){
   addoutpost = !addoutpost;
   var checkbox = $('#myonoffswitch')[0];
   checkbox.checked = !checkbox.checked;
 }
-function initMap(json){
+function initMap(){
   var map = L.map('map').setView([40, 0],2);
 
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -15,9 +21,9 @@ function initMap(json){
   }).addTo(map);
 
   var popup = L.popup();
+
   function onMapClick(e){
     if(addoutpost){
-      console.log("popup");
       popup
         .setLatLng(e.latlng)
         .setContent("asdf")
@@ -26,17 +32,30 @@ function initMap(json){
   }
   map.on('click', onMapClick);
 
+  populateOutposts(map);
+
+  addOutpost("paramtest", 10, 10);
+}
+
+function populateOutposts(map){
   //add a marker to the map for each outpost
-  for(i=0; i<json.length; i++){
-    var outpost = json[i];
-    try{
-      var lat = outpost.coords.lat;
-      var long = outpost.coords.long;
-      var marker = L.marker([long, lat]).addTo(map); //leaflet uses the coords like this
-      marker.bindPopup("<b>"+outpost.name+"</b>");
-    }catch(e){
-
+  $.getJSON('/api/outposts', function(json){
+    console.log(json);
+    for(i=0; i<json.length; i++){
+      var outpost = json[i];
+      try{
+        var lat = outpost.coords.lat;
+        var long = outpost.coords.long;
+        var marker = L.marker([long, lat]).addTo(map); //leaflet uses the coords like this
+        marker.bindPopup("<b>"+outpost.name+"</b>");
+      }catch(e){
+      }
     }
-  }
+  });
+}
 
+function addOutpost(name, latitude, longitude){
+  request.post(window.location.origin+'/api/addoutpost').form({outpostname: name,
+                                                            lat: parseInt(latitude),
+                                                            long:parseInt(longitude)});
 }
