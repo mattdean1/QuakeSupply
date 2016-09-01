@@ -31,4 +31,6 @@ npm-debug.log
 app/nodemodules/*
 
 #mongodb
-app/data/*
+data/*
+
+.DS_Store
