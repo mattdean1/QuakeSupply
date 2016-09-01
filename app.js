@@ -8,7 +8,9 @@ var request = require('request');
 
 var mongo = require('mongodb');
 var monk = require('monk');
-// var db = monk('localhost:27017/nodetest1');
+//var db = monk('localhost:27017/nodetest1');
+var db = monk('heroku_gv1rn240:gk10fvpl27rfjk4e882a035u4c@ds021026.mlab.com:21026/heroku_gv1rn240');
+
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -28,10 +30,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //cheese db
-// app.use(function(req,res,next){
-//     req.db = db;
-//     next();
-// });
+app.use(function(req,res,next){
+    req.db = db;
+    next();
+});
 app.use('/', routes);
 app.use('/users', users);
 
