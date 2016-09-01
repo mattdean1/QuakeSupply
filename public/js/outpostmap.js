@@ -1,3 +1,9 @@
+var addoutpost = false;
+function toggle(){
+  addoutpost = !addoutpost;
+  var checkbox = $('#myonoffswitch')[0];
+  checkbox.checked = !checkbox.checked;
+}
 function initMap(json){
   var map = L.map('map').setView([40, 0],2);
 
@@ -8,12 +14,29 @@ function initMap(json){
     accessToken: 'pk.eyJ1IjoiZGVhbm1hdHQiLCJhIjoiY2lzamdpdXJxMDAzMTJ0cm5nOWNyb3pnMSJ9.z8vZUaEEP1a4Akowh6Vzlw'
   }).addTo(map);
 
+  var popup = L.popup();
+  function onMapClick(e){
+    if(addoutpost){
+      console.log("popup");
+      popup
+        .setLatLng(e.latlng)
+        .setContent("asdf")
+        .openOn(map);
+    }
+  }
+  map.on('click', onMapClick);
+
   //add a marker to the map for each outpost
   for(i=0; i<json.length; i++){
-    var lat = json[i].coords.lat;
-    var long = json[i].coords.long;
-    var marker = L.marker([long, lat]).addTo(map); //leaflet uses the coords like this
-  }
+    var outpost = json[i];
+    try{
+      var lat = outpost.coords.lat;
+      var long = outpost.coords.long;
+      var marker = L.marker([long, lat]).addTo(map); //leaflet uses the coords like this
+      marker.bindPopup("<b>"+outpost.name+"</b>");
+    }catch(e){
 
+    }
+  }
 
 }
