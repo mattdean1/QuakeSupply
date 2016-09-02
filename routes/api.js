@@ -64,7 +64,7 @@ router.get('/earthquakes', function(req, res, next) {
     if (!error && response.statusCode == 200) {
       res.json(JSON.parse(body));
     }else{
-      res.redirect('overview', {title:'index'});
+      res.send(error);
     }
   })
 });
