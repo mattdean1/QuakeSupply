@@ -1,11 +1,20 @@
-function addOutpost(name, latitude, longitude){
+function addOutpost(name, latitude, longitude, food, water, tarpaulin){
   //add new outpost to the db using the api
-  var outpost = {outpostname: name,lat: parseInt(latitude),long:parseInt(longitude)}
-  $.ajax({
-    type: 'POST',
-    data: outpost,
-    url: window.location.origin+'/api/addoutpost',
-  })
+    var outpost = { outpostname: name,
+                    lat: latitude,
+                    long:longitude,
+                    food: (food || 100), //defaults to 100 if params are not set i.e. when outpost is added from map
+                    water: (water || 100),
+                    tarpaulin: (tarpaulin || 100)
+                  }
+    $.ajax({
+      type: 'POST',
+      data: outpost,
+      url: window.location.origin+'/api/addoutpost',
+    })
+}
+function addNew(){
+  addOutpost(getVal("name"), getVal("lat"), getVal("long"), getVal("food"), getVal("water"), getVal("tarpaulin"));
 }
 
 function deleteOutpost(outpostid){

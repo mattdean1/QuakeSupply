@@ -77,22 +77,17 @@ router.post('/addoutpost', function(req, res) {
           "lat" : parseInt(req.body.lat),
           "long" : parseInt(req.body.long)
         },
-        //set default values 100 if params are not set
         "supplies": {
-          "food" : (parseInt(req.body.food) || 100),
-          "water" : (parseInt(req.body.water) || 100),
-          "tarpaulin" : (parseInt(req.body.tarpaulin) || 100)
+          "food" : parseInt(req.body.food),
+          "water" : parseInt(req.body.water),
+          "tarpaulin" : parseInt(req.body.tarpaulin)
         }
     }, function (e, doc) {
         if (e) {
             res.send(e);
         }
         else {
-            if(req.body.manual=="true"){
-              res.redirect(origin+"/overview");
-            }else{
-              res.send({message:'outpost added'});
-            }
+            res.send({message:'outpost added'});
         }
     });
 });

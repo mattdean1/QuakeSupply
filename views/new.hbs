@@ -1,0 +1,27 @@
+<div style="padding:10px;margin-bottom:40px;">
+  <h5>Add new outpost</h5>
+  <a href="/outpostmap" class="btn right valign">Map</a>
+  <a href="/overview" class="btn right valign">Overview</a>
+</div>
+<div class="row">
+  <form method="get" action="/" onSubmit="addNew()">
+      <input id="name" type="text" name="outpostname" placeholder="name" required></input>
+      Coordinates:
+      <input id="lat" type="number" name="lat" placeholder="latitude" required></input>
+      <input id="long" type="number" name="long" placeholder="longitude" required></input>
+      Supplies: <br><br>
+      <div class="input-field">
+        <input id="food" type="number" name="food" placeholder="100" min="0"></input>
+        <label for="food">Food</label>
+      </div>
+      <div class="input-field">
+        <input id="water" type="number" name="water" placeholder="100" min="0"></input>
+        <label for="water">Water</label>
+      </div>
+      <div class="input-field">
+        <input id="tarpaulin" type="number" name="tarpaulin" placeholder="100" min="0"></input>
+        <label for="tarpaulin">Tarpaulin</label>
+      </div>
+      <button class="btn" type="submit">submit</button>
+  </form>
+</div>

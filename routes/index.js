@@ -12,13 +12,13 @@ router.get('/', function(req, res, next) {
 
 //render new outpost form
 router.get('/newoutpost', function(req, res) {
-    res.render('newoutpost', { title: 'New' });
+    res.render('new', { title: 'New' });
 });
 
 //render overview using data from /api/outposts
 router.get('/overview', function(req, res) {
     request(origin+'/api/outposts', function (error, response, body) {
-        res.render('inventoryoverview', {
+        res.render('overview', {
                  title : 'Overview',
                  outpostlist : JSON.parse(body)
              });
@@ -28,7 +28,7 @@ router.get('/overview', function(req, res) {
 //render map using data from /api/outposts
 router.get('/outpostmap', function(req, res) {
     request(origin+'/api/outposts', function (error, response, body) {
-        res.render('outpostmap', {
+        res.render('map', {
                  title : 'Map',
                  outpostlist : JSON.parse(body)
              });
@@ -38,7 +38,7 @@ router.get('/outpostmap', function(req, res) {
 //render edit page using data from /api/outposts/:id
 router.get('/editoutpost/:outpostid', function(req, res, next) {
   request(origin+'/api/outposts/'+req.params.outpostid, function (error, response, body) {
-      res.render('editoutpost', {
+      res.render('edit', {
                title : 'Edit',
                outpostlist : JSON.parse(body)
            });

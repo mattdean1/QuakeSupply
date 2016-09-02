@@ -23,9 +23,7 @@ function initMap(json){
     accessToken: 'pk.eyJ1IjoiZGVhbm1hdHQiLCJhIjoiY2lzamdpdXJxMDAzMTJ0cm5nOWNyb3pnMSJ9.z8vZUaEEP1a4Akowh6Vzlw'
   }).addTo(map);
 
-
-
-  //map onclick if toggle is set
+  //map onclick (only activates if 'addoutpost' toggle is true)
   function onMapClick(e){
     if(addoutpost){
       swal( {   title: "Create Outpost!",
