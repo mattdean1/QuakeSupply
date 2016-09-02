@@ -1,6 +1,15 @@
 <div style="padding:10px;margin-bottom:40px;">
-  <a href="/newoutpost" class="btn right valign">Add manual outpost</a>
-  <a href="/outpostmap" class="btn right valign">View on map</a>
+  <a href="/overview" class="btn right valign">Overview</a>
+  <a href="/outpostmap" class="btn right valign">Map</a>
+{{#each outpostlist}}
+  <a
+    class="btn right valign"
+    href="/overview"
+    onclick="deleteOutpost('{{_id}}', function(){})"
+  >
+    Delete outpost
+  </a>
+{{/each}}
 </div>
 <div class="row">
     <table id="table" class="display">
@@ -10,24 +19,28 @@
             <th>Food</th>
             <th>Water</th>
             <th>Tarpaulin</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         {{#each outpostlist}}
           <tr>
-            <td>{{name}}</td>
-            <td>{{supplies.food}}</td>
-            <td>{{supplies.water}}</td>
-            <td>{{supplies.tarpaulin}}</td>
-            <td><a href="/editoutpost/{{_id}}">edit</a></td>
+            <td><input id="name" type="text" placeholder="{{name}}"></input></td>
+            <td><input id="food" type="number" placeholder="{{supplies.food}}"></input></td>
+            <td><input id="water" type="number" placeholder="{{supplies.water}}"></input></td>
+            <td><input id="tarpaulin" type="number" placeholder="{{supplies.tarpaulin}}"></input></td>
+            <td>
+                <a
+                  class="btn"
+                  href="/editoutpost/{{_id}}"
+                  onclick="editOutpost('{{_id}}')"
+                >
+                  Submit
+                </a>
+            </td>
           </tr>
         {{/each}}
     </tbody>
 </table>
 
 </div>
-<script>
-$(document).ready( function () {
-  $('#table').DataTable();
-} );
-</script>

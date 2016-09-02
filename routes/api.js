@@ -32,6 +32,7 @@ router.route('/outposts/:outpostid')
     //update an outpost
     collection.update({_id: req.params.outpostid},
                       {$set:{
+                        'name': req.body.outpostname,
                         'supplies.food': parseInt(req.body.food),
                         'supplies.water': parseInt(req.body.water),
                         'supplies.tarpaulin': parseInt(req.body.tarpaulin)

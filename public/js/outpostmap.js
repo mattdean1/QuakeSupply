@@ -62,7 +62,6 @@ function initMap(json){
 function populateOutposts(map){
   //add a marker to the map for each outpost
   $.getJSON('/api/outposts', function(json){
-    console.log(json);
     for(i=0; i<json.length; i++){
       var outpost = json[i];
       try{
