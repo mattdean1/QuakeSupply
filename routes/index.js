@@ -2,7 +2,8 @@ var express = require('express');
 var request = require('request');
 var router = express.Router();
 
-const origin = "https://recruitment-hack.herokuapp.com";
+// const origin = "https://recruitment-hack.herokuapp.com";
+const origin = "http://localhost:3000";
 
 //redirect to overvew
 router.get('/', function(req, res, next) {
@@ -11,14 +12,14 @@ router.get('/', function(req, res, next) {
 
 //render new outpost form
 router.get('/newoutpost', function(req, res) {
-    res.render('newoutpost', { title: 'Add New outpost' });
+    res.render('newoutpost', { title: 'New' });
 });
 
 //render overview using data from /api/outposts
 router.get('/overview', function(req, res) {
     request(origin+'/api/outposts', function (error, response, body) {
         res.render('inventoryoverview', {
-                 title : 'outpost overview',
+                 title : 'Overview',
                  outpostlist : JSON.parse(body)
              });
     });
@@ -28,17 +29,17 @@ router.get('/overview', function(req, res) {
 router.get('/outpostmap', function(req, res) {
     request(origin+'/api/outposts', function (error, response, body) {
         res.render('outpostmap', {
-                 title : 'outpost map',
+                 title : 'Map',
                  outpostlist : JSON.parse(body)
              });
     });
 });
 
 //render edit page using data from /api/outposts/:id
-router.get('/editoutpost/:id', function(req, res, next) {
-  request(origin+'/api/outposts/'+req.params.id, function (error, response, body) {
+router.get('/editoutpost/:outpostid', function(req, res, next) {
+  request(origin+'/api/outposts/'+req.params.outpostid, function (error, response, body) {
       res.render('editoutpost', {
-               title : 'edit outpost',
+               title : 'Edit',
                outpostlist : JSON.parse(body)
            });
   });

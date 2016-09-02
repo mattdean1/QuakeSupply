@@ -72,7 +72,7 @@ function populateOutposts(map){
             content+= "Food: "+outpost.supplies.food+"<br>";
             content+= "Water: "+outpost.supplies.water+"<br>";
             content+= "Tarpaulin: "+outpost.supplies.tarpaulin+"<br><br>";
-            content+= "<div style='text-align:right'><a href=''>Edit</a></div>";
+            content+= "<div style='text-align:right'><a href='"+window.location.origin+"/editoutpost/"+outpost._id+"'>Edit</a></div>";
         var popup = L.popup({closeButton: false})
           .setContent(content);
         var marker = L.marker([lat, long]).addTo(map);
