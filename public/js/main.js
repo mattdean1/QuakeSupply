@@ -14,24 +14,25 @@ function deleteOutpost(outpostid){
     url: window.location.origin+"/api/outposts/"+outpostid,
   });
 }
+
 function editOutpost(outpostid){
-  console.log(outpostid);
   var outpost = {outpostname: getVal("name"),
                  food: getVal("food"),
                  water: getVal("water"),
                  tarpaulin: getVal("tarpaulin")
                };
-  console.log(outpost);
   $.ajax({
     type: "PUT",
     data: outpost,
     url: window.location.origin+"/api/outposts/"+outpostid
   });
 }
+
+//get the value/placeholder of an element from it's id
 function getVal(id){
   var elem = $('#'+id);
   var val;
-  if(elem.val()==""){
+  if(elem.val()==""){ //if the value is blank, return the placeholder
     val = elem.attr("placeholder");
   }else{
     val = elem.val();
