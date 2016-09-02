@@ -15,7 +15,7 @@ function initMap(json){
   var lat = coordinates[1];
 
   //map and tiles
-  map = L.map('map').setView([lat, long],4);
+  map = L.map('map').setView([lat, long],5);
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     //attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
     maxZoom: 18,
@@ -90,9 +90,14 @@ function populateOutposts(){
       var epicentre = "<b>Epicentre</b><br>";
           epicentre+= "Magnitude: "+magnitude+"<br>";
           epicentre+= "Time: "+time;
-      var popup = L.popup({closeOnClick:false, closeButton: false})
+      var popup = L.popup({closeOnClick:false})
         .setContent(epicentre);
-      var marker = L.marker([lat, long]);
+      //var marker = L.marker([lat, long]);
+      var marker = L.circle([lat, long], 40000, {
+                      color:'red',
+                      fillColor:'#f03',
+                      fillOpacity: 0.5
+                  });
       marker.bindPopup(popup);
       layergroup.addLayer(marker);
       marker.openPopup();
