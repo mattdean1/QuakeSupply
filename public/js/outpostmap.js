@@ -105,15 +105,15 @@ function populateOutposts(){
   });
 }
 
+function del(outpostid){
+  deleteOutpost(outpostid);
+  map.removeLayer(layergroup);
+  populateOutposts();
+}
+
 //toggle for adding outposts to map onclick
 function toggle(){
   addoutpost = !addoutpost;
   var checkbox = $('#myonoffswitch')[0];
   checkbox.checked = !checkbox.checked;
-}
-
-function del(outpostid){
-  deleteOutpost(outpostid);
-  map.removeLayer(layergroup);
-  populateOutposts();
 }
