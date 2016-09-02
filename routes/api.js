@@ -8,7 +8,6 @@ var db = monk('heroku_gv1rn240:gk10fvpl27rfjk4e882a035u4c@ds021026.mlab.com:2102
 var collection = db.get('inventorytest');
 
 const origin = "https://recruitment-hack.herokuapp.com";
-//const origin = "http://localhost:3000";
 
 //get list of all outposts.
 router.get('/outposts', function(req, res, next) {

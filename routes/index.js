@@ -3,7 +3,6 @@ var request = require('request');
 var router = express.Router();
 
 const origin = "https://recruitment-hack.herokuapp.com";
-// const origin = "http://localhost:3000";
 
 //redirect to overvew
 router.get('/', function(req, res, next) {
