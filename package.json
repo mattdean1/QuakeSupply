@@ -1,15 +1,12 @@
 {
-  "name": "onboarding-form",
+  "name": "dc-dash",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "watch": "watchify public/js/main.js -o public/js/bundle.js -v",
-    "build": "browserify public/js/main.js -o public/js/bundle.js",
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.15.1",
-    "browserify": "^13.1.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "express": "~4.13.4",
@@ -19,10 +16,6 @@
     "morgan": "~1.7.0",
     "nodemon": "^1.10.2",
     "request": "^2.74.0",
-    "serve-favicon": "~2.3.0",
-    "watchify": "^3.7.0"
-  },
-  "devDependencies": {
-    "nodemon": "^1.10.2"
+    "serve-favicon": "~2.3.0"
   }
 }
