@@ -4,10 +4,19 @@ var router = express.Router();
 
 var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk('heroku_gv1rn240:gk10fvpl27rfjk4e882a035u4c@ds021026.mlab.com:21026/heroku_gv1rn240');
+
+var host = process.env.MONGODB_SERVICE_HOST;
+var port = process.env.MONGODB_SERVICE_PORT;
+
+var user = process.env.MONGODB_USER;
+var password = process.env.MONGODB_PASSWORD;
+
+var database = process.env.MONGODB_DATABASE;
+
+var db = monk(user+':'+pass+'@'+host+':'+port+'/'+database);
 var collection = db.get('inventorytest');
 
-const origin = "https://recruitment-hack.herokuapp.com";
+var origin = "http://node-recruitment-hack.paas-poc.am.lilly.com";
 
 //get list of all outposts.
 router.get('/outposts', function(req, res, next) {

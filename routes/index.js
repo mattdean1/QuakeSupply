@@ -2,7 +2,7 @@ var express = require('express');
 var request = require('request');
 var router = express.Router();
 
-const origin = "https://recruitment-hack.herokuapp.com";
+var origin = "http://node-recruitment-hack.paas-poc.am.lilly.com";
 
 //redirect to overvew
 router.get('/', function(req, res, next) {
