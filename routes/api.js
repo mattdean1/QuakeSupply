@@ -13,7 +13,7 @@ var password = process.env.MONGODB_PASSWORD;
 
 var database = process.env.MONGODB_DATABASE;
 
-var db = monk(user+':'+pass+'@'+host+':'+port+'/'+database);
+var db = monk(user+':'+password+'@'+host+':'+port+'/'+database);
 var collection = db.get('inventorytest');
 
 var origin = "http://node-recruitment-hack.paas-poc.am.lilly.com";
