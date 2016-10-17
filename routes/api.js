@@ -5,13 +5,12 @@ var router = express.Router();
 var mongo = require('mongodb');
 var monk = require('monk');
 
-var host = process.env.MONGODB_SERVICE_HOST;
-var port = process.env.MONGODB_SERVICE_PORT;
-
 var user = process.env.MONGODB_USER;
 var password = process.env.MONGODB_PASSWORD;
-
 var database = process.env.MONGODB_DATABASE;
+
+var host = process.env.MONGO_SERVICE_HOST;
+var port = process.env.MONGO_SERVICE_PORT;
 
 var db = monk(user+':'+password+'@'+host+':'+port+'/'+database);
 var collection = db.get('inventorytest');
