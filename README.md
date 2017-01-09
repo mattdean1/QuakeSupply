@@ -22,6 +22,6 @@ I pull live data from the US Geological Survey API and use Leaflet.js for mappin
 ![An outpost showing the supplies available](public/img/outpost.PNG)
 
 
-###### The overview page showing the remaining supplies at each location
+##### The overview page showing the remaining supplies at each location
 
 ![An overview page showing the remaining supplies at each location](public/img/overview.PNG)
