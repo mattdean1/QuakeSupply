@@ -12,7 +12,7 @@ I pull live data from the US Geological Survey API and use Leaflet.js for mappin
 ![Displaying outposts and earthquake data pulled from the USGS API](public/img/map.PNG)
 
 
-##### Adding an outpost to the map
+##### Adding an outpost by clicking on the map
 
 ![Adding an outpost to the map](public/img/add.PNG)
 
