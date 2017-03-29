@@ -1,4 +1,4 @@
-##Demo app for a developer recruitment hackathon
+## Demo app for a developer recruitment hackathon
 
 I learned Node, Express, and Handlebars over 2-3 days whilst making this demo app, then went on to run a Node.js bootcamp (a 90 minute webinar) and mentor students through the recruitment process.
 
